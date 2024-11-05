@@ -1,23 +1,7 @@
+import { ITransaction } from '@/interface';
 import { NextRequest, NextResponse } from 'next/server';
 
-let transactions = [
-  {
-    id: 1,
-    title: 'Freelance de website',
-    type: 'deposit',
-    category: 'Desenvolvimento',
-    amount: 12000,
-    createdAt: new Date('2022-04-10 08:20:00'),
-  },
-  {
-    id: 2,
-    title: 'Aluguel do apartamento',
-    type: 'withdraw',
-    category: 'Casa',
-    amount: 1500,
-    createdAt: new Date('2022-04-12 13:55:00'),
-  },
-];
+let transactions: ITransaction[] = [];
 
 export async function GET() {
   return NextResponse.json({ transactions });
