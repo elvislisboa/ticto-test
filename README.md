@@ -39,6 +39,7 @@ This project was made using the follow technologies:
 - [NextJs](https://nextjs.org/)
 - [Saas](https://sass-lang.com/)
 - [Sentry](https://sentry.io/welcome/)
+- [Jest](https://jestjs.io/pt-BR/)
 - [React Test Library](https://testing-library.com/docs/react-testing-library/intro/)
 - [Github Actions](https://docs.github.com/en/actions)
 - [React Hook Form](https://www.react-hook-form.com/)
