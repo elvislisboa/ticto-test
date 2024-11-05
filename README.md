@@ -54,7 +54,7 @@ $ git clone https://github.com/elvislisboa/ticto-test
 $ yarn
 
 # Run Aplication
-$ yarn start
+$ yarn dev
 
 # Run Test
 $ yarn test
