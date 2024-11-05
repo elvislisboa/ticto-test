@@ -23,8 +23,8 @@ export const TransactionsTable: React.FC<ITransactionsTableLayout> = ({ transact
         <li>Data</li>
       </ul>
 
-      {transactions.map(transaction => (
-        <ul className={styles.body} key={transaction.id}>
+      {transactions.map((transaction, index) => (
+        <ul className={styles.body} key={index}>
           <li>{transaction.title}</li>
           <li className={styles[transaction.type]}>{new Intl.NumberFormat('pt-BR', {
             style: 'currency',

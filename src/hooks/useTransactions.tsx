@@ -43,8 +43,14 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
 	useEffect(() => {
 		const fetchTransactions = async () => {
 			try {
-				const { data } = await getTransactions();
-				setTransactions(data.transactions);
+				const response = await getTransactions();
+
+				if (response && response.data && response.data.transactions) {
+					setTransactions(response.data.transactions);
+				} else {
+					console.warn('Nenhuma transação encontrada ou dados indefinidos.');
+					setTransactions([]);
+				}
 			} catch (error) {
 				console.error('Erro ao buscar transações:', error);
 			}
@@ -55,18 +61,25 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
 
 	async function createTransaction(transactionInput: Omit<ITransaction, 'id' | 'createdAt'>) {
 		try {
+			if (!transactionInput) return;
+
 			const transaction = await postTransaction({
 				...transactionInput
 			});
 
-			setTransactions(prevData => [
-				...prevData,
-				transaction,
-			]);
+			if (transaction) {
+				setTransactions(prevData => [
+					...prevData,
+					transaction,
+				]);
+			} else {
+				console.warn('A transação retornada é indefinida.');
+			}
 		} catch (error) {
 			console.error('Erro ao criar a transação:', error);
 		}
 	};
+
 
 	async function trashTransaction(id: number) {
 		try {

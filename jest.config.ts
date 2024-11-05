@@ -6,20 +6,18 @@ const createJestConfig = nextJest({
 });
 
 const customJestConfig: Config = {
+  preset: "ts-jest",
   coverageProvider: "v8",
   testEnvironment: "jsdom",
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
-  preset: "ts-jest",
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
-    "swiper/css": "swiper/swiper.min.css"
+    "^swiper/css$": "<rootDir>/src/__mocks__/styleMock.ts",
+    "^swiper/css/pagination$": "<rootDir>/src/__mocks__/styleMock.ts",
+    "^swiper/modules$": "<rootDir>/src/__mocks__/swiperMock.tsx",
+    "^swiper/react$": "<rootDir>/src/__mocks__/swiperMock.tsx",
+    "\\.(css|scss|sass)$": "<rootDir>/src/__mocks__/styleMock.ts",
   },
-  transformIgnorePatterns: [
-    "node_modules/(?!(swiper|ssr-window|dom7)/.*)"
-  ],
-  transform: {
-    '^.+\\.(js|jsx|ts|tsx|mjs)$': ['babel-jest', { presets: ['next/babel'] }]
-  }
 };
 
 export default createJestConfig(customJestConfig);
