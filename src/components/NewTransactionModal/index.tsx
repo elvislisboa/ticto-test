@@ -1,43 +1,58 @@
 "use client"
+import { z } from "zod";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useTransactions } from "@/hooks/useTransactions";
+
 import { NewTransactionModal as Layout } from "./Layout";
 import { INewTransactionModal } from "./data";
-import { FormEvent, useState } from "react";
 
 export const NewTransactionModal = (props: INewTransactionModal) => {
   const { createTransaction, handleToggleNewTransactionModal, isToggleNewTransactionModal } = useTransactions();
 
-  const [title, setTitle] = useState<string>("");
-  const [amount, setAmount] = useState<number>(0);
-  const [category, setCategory] = useState<string>("");
   const [type, setType] = useState<"withdraw" | "deposit">("deposit");
 
-  async function handleCreateNewTransaction(event: FormEvent) {
-    event.preventDefault();
+  const personalDataSchema = z.object({
+    title: z
+      .string()
+      .nonempty("Nome do registro é obrigatório."),
+    amount: z
+      .number().min(1, "O valor do registro deve ser maior que 0."),
+    category: z
+      .string()
+      .nonempty("A categoria é obrigatória.")
 
+  });
+
+  type PersonalDataForm = z.infer<typeof personalDataSchema>;
+
+  const { control, handleSubmit, formState: { errors }, reset } = useForm<PersonalDataForm>({
+    resolver: zodResolver(personalDataSchema),
+    defaultValues: {
+      title: '',
+      amount: 0,
+      category: '',
+    },
+  });
+
+  async function handleCreateNewTransaction(data: PersonalDataForm) {
     await createTransaction({
-      title,
-      amount,
-      category,
+      ...data,
       type,
     })
 
-    setTitle("");
-    setAmount(0);
-    setCategory("");
+    reset();
     setType("deposit");
     handleToggleNewTransactionModal();
   }
 
   const layoutProps = {
     type,
-    title,
-    amount,
-    category,
+    errors,
     setType,
-    setTitle,
-    setAmount,
-    setCategory,
+    control,
+    handleSubmit,
     handleCreateNewTransaction,
     isToggleNewTransactionModal,
     handleToggleNewTransactionModal,

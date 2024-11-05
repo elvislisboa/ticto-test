@@ -1,17 +1,21 @@
-import { Dispatch, FormEvent, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
+import { Control, FieldErrors, UseFormHandleSubmit } from "react-hook-form";
+
+interface ITransaction {
+	amount: number;
+	category: string;
+	title: string;
+}
 
 export interface INewTransactionModal { }
 
 export interface INewTransactionModalLayout extends INewTransactionModal {
 	type: string;
-	title: string;
-	amount: number;
-	category: string;
+	control: Control<ITransaction, any>;
+	handleSubmit: UseFormHandleSubmit<ITransaction, undefined>
+	errors: FieldErrors<ITransaction>;
 	setType: Dispatch<SetStateAction<"withdraw" | "deposit">>;
-	setTitle: Dispatch<SetStateAction<string>>;
-	setAmount: Dispatch<SetStateAction<number>>;
-	setCategory: Dispatch<SetStateAction<string>>;
-	handleCreateNewTransaction: (event: FormEvent) => Promise<void>;
+	handleCreateNewTransaction: (data: ITransaction) => Promise<void>;
 	isToggleNewTransactionModal: boolean;
 	handleToggleNewTransactionModal: () => void;
 }

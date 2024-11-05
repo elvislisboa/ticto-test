@@ -25,6 +25,8 @@
 		color: var(--text-title);
 		background: var(--shape);
 
+		transition: all .7s;
+
 		span {
 			display: flex;
 			align-items: center;
@@ -49,6 +51,13 @@
 		@extend .card;
 
 		background: var(--green);
+		color: var(--shape)
+	}
+
+	.lowlight {
+		@extend .card;
+
+		background: var(--red);
 		color: var(--shape)
 	}
 }

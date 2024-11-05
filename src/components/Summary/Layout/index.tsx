@@ -54,7 +54,7 @@ export const Summary: React.FC<ISummaryLayout> = ({ summary }) => {
         </SwiperSlide>
 
         <SwiperSlide>
-          <div className={styles.highlight}>
+          <div className={styles[summary.total >= 0 ? "highlight" : "lowlight"]}>
             <span>
               <p>Total</p>
             </span>

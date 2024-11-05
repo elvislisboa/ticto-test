@@ -2,13 +2,15 @@ import React from "react";
 import Modal from 'react-modal';
 
 import { currencyFormat } from "@/constants";
+import { Input } from "@/components";
+import { Controller } from "react-hook-form";
 import { INewTransactionModalLayout } from "../data";
 import { close, incomeCircle, outcomeCircle } from "@/assets";
 
 import styles from "./styles.module.scss"
 import Image from "next/image";
 
-export const NewTransactionModal: React.FC<INewTransactionModalLayout> = ({ handleCreateNewTransaction, isToggleNewTransactionModal, handleToggleNewTransactionModal, amount, category, setAmount, setCategory, setTitle, setType, title, type }) => {
+export const NewTransactionModal: React.FC<INewTransactionModalLayout> = ({ handleCreateNewTransaction, isToggleNewTransactionModal, handleToggleNewTransactionModal, handleSubmit, control, setType, type, errors }) => {
   return (
     <Modal
       isOpen={isToggleNewTransactionModal}
@@ -25,23 +27,40 @@ export const NewTransactionModal: React.FC<INewTransactionModalLayout> = ({ hand
         <Image src={close} alt="Fechar modal" />
       </button>
 
-      <form className={styles.form} onSubmit={handleCreateNewTransaction}>
+      <form className={styles.form} onSubmit={handleSubmit(handleCreateNewTransaction)}>
         <h2>Cadastrar transação</h2>
 
-        <input
-          placeholder='Nome'
-          value={title}
-          onChange={event => setTitle(event.target.value)}
+        <Controller
+          name="title"
+          control={control}
+          render={({ field }) => (
+            <Input
+              {...field}
+              value={field.value || ''}
+              type="text"
+              placeholder="Nome"
+              error={errors.title?.message}
+            />
+          )}
         />
-        <input
-          type="text"
-          inputMode="numeric"
-          placeholder="Preço"
-          value={amount > 0 ? (currencyFormat(amount, 'output') as string) : ""}
-          onChange={event => {
-            const parsedValue = currencyFormat(event.target.value, 'input') as number;
-            setAmount(parsedValue);
-          }}
+
+        <Controller
+          name="amount"
+          control={control}
+          render={({ field }) => (
+            <Input
+              {...field}
+              type="text"
+              inputMode="numeric"
+              placeholder="Preço"
+              value={field.value > 0 ? (currencyFormat(field.value, 'output') as string) : ""}
+              onChange={event => {
+                const parsedValue = currencyFormat(event.target.value, 'input') as number;
+                field.onChange(parsedValue);
+              }}
+              error={errors.amount?.message}
+            />
+          )}
         />
 
         <div className={styles.transactionTypeWrapper}>
@@ -64,10 +83,16 @@ export const NewTransactionModal: React.FC<INewTransactionModalLayout> = ({ hand
           </button>
         </div>
 
-        <input
-          placeholder='Categoria'
-          value={category}
-          onChange={event => setCategory(event.target.value)}
+        <Controller
+          name="category"
+          control={control}
+          render={({ field }) => (
+            <Input
+              {...field}
+              placeholder='Categoria'
+              error={errors.category?.message}
+            />
+          )}
         />
         <button type="submit">
           CADASTRAR
