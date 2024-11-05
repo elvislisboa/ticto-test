@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<p align="center">
+   <img src="./src/assets/logo.svg" alt="Ticto logomarca" width="250"/>
+</p>
 
-## Getting Started
+<br />
 
-First, run the development server:
+<p align="center">
+  Finance. Project developed during challenge of ticto
+</p>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<div align="center">
+  <sub> Made by
+    <a href="https://github.com/elvislisboa">Elvis Lisboa.
+  </sub>
+</div>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Contents
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [Screenshots](#camera-screenshot)
+- [Technologies](#rocket-technologies)
+- [How to Run](#computer-how-to-run)
+- [Issues](#bug-issues)
+- [Contributing](#sparkles-issues)
+- [License](#page_facing_up-license)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Screenshots
 
-## Learn More
+<div align="center">
+   <img src="./.github/performance.png" width="400px">
+   <img src="./.github/sentry.png" width="400px">
+   <img src="./.github/project.png" width="400px">
+</div>
 
-To learn more about Next.js, take a look at the following resources:
+# Technologies
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project was made using the follow technologies:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- [Typescript](https://www.typescriptlang.org/)
+- [NextJs](https://nextjs.org/)
+- [Saas](https://sass-lang.com/)
+- [Sentry](https://sentry.io/welcome/)
+- [React Test Library](https://testing-library.com/docs/react-testing-library/intro/)
+- [Github Actions](https://docs.github.com/en/actions)
+- [React Hook Form](https://www.react-hook-form.com/)
+- [Zod](https://zod.dev/)
 
-## Deploy on Vercel
+# How to run
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+bash
+# Clone Repository
+$ git clone https://github.com/elvislisboa/ticto-test
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+bash
+# Install Dependencies
+$ yarn
+
+# Run Aplication
+$ yarn start
+
+# Run Test
+$ yarn test
+
+
+<p>
+  Go to http://localhost:3000/ to see the result Web.
+</p>
+
+
+# Issues
+
+Create a <a href="https://github.com/elvislisboa/issues">new issue report</a>, it will be an honor to be able to help you solve and further improve our application.
+
+# Contributing
+
+- Fork this repository;
+- Create a branch with your feature: git checkout -b my-feature;
+- Commit your changes: git commit -m 'feat: My new feature';
+- Push to your branch: git push origin my-feature.
+
+# License
+
+This project is under the [MIT license](./LICENSE).
+Made by [Elvis Lisboa](https://github.com/elvislisboa).
+
+Thank you! 🌠
+
+# See website in deploy
+
+\*[Deploy Vercel](https://ticto-test.vercel.app/)
